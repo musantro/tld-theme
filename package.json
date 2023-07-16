@@ -8,7 +8,9 @@
     },
     "license": "MIT",
     "author": {
-        "name": "Antonio Rodríguez"
+        "name": "Antonio Rodríguez",
+        "email": "hello@thelaziest.dev",
+        "url": "https://thelaziest.dev"
     },
     "keywords": [
         "ghost",
