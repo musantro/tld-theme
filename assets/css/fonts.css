@@ -2,6 +2,7 @@
     font-family: Manrope;
     font-weight: 100 1000;
     src: url("../fonts/Manrope[wght].woff2") format("woff2-variations");
+    font-display: swap;
 }
 
 @font-face {
@@ -9,6 +10,7 @@
     font-style: normal;
     font-weight: 400;
     src: local(""), url("../fonts/libre-baskerville-v14-latin-regular.woff2") format("woff2");
+    font-display: swap;
 }
 
 @font-face {
@@ -16,6 +18,7 @@
     font-style: normal;
     font-weight: 700;
     src: local(""), url("../fonts/libre-baskerville-v14-latin-700.woff2") format("woff2");
+    font-display: swap;
 }
 
 @font-face {
@@ -23,6 +26,7 @@
     font-style: italic;
     font-weight: 400;
     src: local(""), url("../fonts/libre-baskerville-v14-latin-italic.woff2") format("woff2");
+    font-display: swap;
 }
 
 @font-face {
@@ -30,6 +34,7 @@
     font-style: normal;
     font-weight: 400;
     src: local(""), url("../fonts/jetbrains-mono-v13-latin-regular.woff2") format("woff2");
+    font-display: swap;
 }
 
 @font-face {
@@ -37,6 +42,7 @@
     font-style: normal;
     font-weight: 700;
     src: local(""), url("../fonts/jetbrains-mono-v13-latin-700.woff2") format("woff2");
+    font-display: swap;
 }
 
 @font-face {
@@ -44,6 +50,7 @@
     font-style: normal;
     font-weight: 800;
     src: local(""), url("../fonts/jetbrains-mono-v13-latin-800.woff2") format("woff2");
+    font-display: swap;
 }
 
 @font-face {
@@ -51,6 +58,7 @@
     font-style: italic;
     font-weight: 400;
     src: local(""), url("../fonts/jetbrains-mono-v13-latin-italic.woff2") format("woff2");
+    font-display: swap;
 }
 
 @font-face {
@@ -58,4 +66,5 @@
     font-style: italic;
     font-weight: 700;
     src: local(""), url("../fonts/jetbrains-mono-v13-latin-700italic.woff2") format("woff2");
+    font-display: swap;
 }
