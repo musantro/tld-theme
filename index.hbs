@@ -4,7 +4,11 @@
     <div class="gh-about-inner gh-inner">
         {{#match @custom.header_section_layout "!=" "Typographic profile"}}
             {{#if @site.cover_image}}
-                <img class="gh-about-image" src="{{@site.cover_image}}" alt="{{@site.title}}">
+                <img 
+                    class="gh-about-image" 
+                    src="https://res.cloudinary.com/thelaziestdev/image/fetch/w_720,c_fit,q_auto,f_auto,dpr_auto/{{@site.cover_image}}" 
+                    alt="{{@site.title}}"
+                >
             {{/if}}
         {{else}}
             {{#if @site.icon}}
