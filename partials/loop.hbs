@@ -6,13 +6,14 @@
                 {{#if feature_image}}
                     <img
                         {{#match @custom.post_feed_layout "Parallax"}}class="jarallax-img"{{/match}}
-                        srcset="{{img_url feature_image size="s"}} 300w,
-                                {{img_url feature_image size="m"}} 720w,
-                                {{img_url feature_image size="l"}} 960w,
-                                {{img_url feature_image size="xl"}} 1200w,
-                                {{img_url feature_image size="xxl"}} 2000w"
+                        srcset="https://res.cloudinary.com/thelaziestdev/image/fetch/w_300,c_fit,q_auto,f_auto,dpr_auto/{{img_url feature_image size="s" absolute="true"}} 300w,
+                                https://res.cloudinary.com/thelaziestdev/image/fetch/w_720,c_fit,q_auto,f_auto,dpr_auto/{{img_url feature_image size="m" absolute="true"}} 720w,
+                                https://res.cloudinary.com/thelaziestdev/image/fetch/w_960,c_fit,q_auto,f_auto,dpr_auto/{{img_url feature_image size="l" absolute="true"}} 960w,
+                                https://res.cloudinary.com/thelaziestdev/image/fetch/w_1200,c_fit,q_auto,f_auto,dpr_auto/{{img_url feature_image size="xl" absolute="true"}} 1200w,
+                                https://res.cloudinary.com/thelaziestdev/image/fetch/w_2000,c_fit,q_auto,f_auto,dpr_auto/{{img_url feature_image size="xxl" absolute="true"}} 2000w"
                         sizes="(max-width: 1200px) 100vw, 1200px"
-                        src="{{img_url feature_image size="m"}}"
+                        loading="lazy"
+                        src="https://res.cloudinary.com/thelaziestdev/image/fetch/w_600,c_fit,q_auto,f_auto,dpr_auto/{{img_url feature_image size="m" absolute="true"}}"
                         alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
                     >
                 {{/if}}
