@@ -3,7 +3,7 @@
         {{#if @custom.footer_text}}
             <div class="gh-foot-text">{{@custom.footer_text}}</div>
         {{else}}
-            <div class="gh-foot-text">// Built lazily. Shipped aggressively.</div>
+            <div class="gh-foot-text">&copy; {{date format="YYYY"}} {{@site.title}}</div>
         {{/if}}
     </div>
 </footer>
