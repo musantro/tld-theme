@@ -1,0 +1,19 @@
+<article class="gh-card {{post_class}}">
+    <a class="gh-card-link" href="{{url}}">
+        <h2 class="gh-card-title">{{title}}</h2>
+        {{#if custom_excerpt}}
+            <p class="gh-card-excerpt">{{excerpt}}</p>
+        {{/if}}
+        <footer class="gh-card-meta">
+            <time datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time>
+            {{#if reading_time}}
+                <span class="sep">//</span>
+                <span class="gh-card-reading-time">{{reading_time}}</span>
+            {{/if}}
+            {{#if primary_tag}}
+                <span class="sep">//</span>
+                <span class="gh-card-tag">{{primary_tag.name}}</span>
+            {{/if}}
+        </footer>
+    </a>
+</article>

@@ -1,0 +1,22 @@
+{{!< default}}
+
+<div class="gh-outer">
+    <div class="gh-inner">
+        <section class="gh-about">
+            {{#if @site.description}}
+                <h1 class="gh-about-title">{{@site.title}}</h1>
+                <p class="gh-about-description">{{@site.description}}</p>
+            {{else}}
+                <h1 class="gh-about-title">{{@site.title}}</h1>
+            {{/if}}
+        </section>
+
+        <div class="gh-feed">
+            {{#foreach posts}}
+                {{> "post-card"}}
+            {{/foreach}}
+        </div>
+
+        {{pagination}}
+    </div>
+</div>

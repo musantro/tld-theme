@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{meta_title}}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{asset "built/screen.css"}}">
+
+    <script>
+        (function() {
+            var t = localStorage.getItem('theme');
+            if (t) document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
+
+    {{ghost_head}}
+</head>
+
+<body class="{{body_class}}">
+<div class="gh-viewport">
+
+    {{> header}}
+
+    <main class="gh-main">
+        {{{body}}}
+    </main>
+
+    {{> footer}}
+
+</div>
+
+<script src="{{asset "built/main.min.js"}}"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+{{> dark-mode-overrides}}
+
+{{ghost_foot}}
+
+</body>
+
+</html>

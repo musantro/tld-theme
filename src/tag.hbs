@@ -1,0 +1,24 @@
+{{!< default}}
+
+<div class="gh-outer">
+    <div class="gh-inner">
+        {{#tag}}
+            <section class="gh-archive">
+                <header class="gh-archive-header">
+                    <h1 class="gh-archive-name">{{name}}</h1>
+                    {{#if description}}
+                        <p class="gh-archive-description">{{description}}</p>
+                    {{/if}}
+                </header>
+            </section>
+        {{/tag}}
+
+        <div class="gh-feed">
+            {{#foreach posts}}
+                {{> "post-card"}}
+            {{/foreach}}
+        </div>
+
+        {{pagination}}
+    </div>
+</div>

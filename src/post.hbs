@@ -1,0 +1,59 @@
+{{!< default}}
+
+<div class="gh-outer">
+    <div class="gh-inner">
+        {{#post}}
+            <article class="gh-article {{post_class}}">
+                <header class="gh-article-header">
+                    {{#if primary_tag}}
+                        <a class="gh-article-tag" href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+                    {{/if}}
+                    <h1 class="gh-article-title">{{title}}</h1>
+                    {{#if custom_excerpt}}
+                        <p class="gh-article-excerpt">{{custom_excerpt}}</p>
+                    {{/if}}
+                    <div class="gh-article-meta">
+                        {{#foreach authors}}
+                            <a href="{{url}}">{{name}}</a>
+                        {{/foreach}}
+                        <span class="sep">//</span>
+                        <time datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time>
+                        {{#if reading_time}}
+                            <span class="sep">//</span>
+                            <span>{{reading_time}}</span>
+                        {{/if}}
+                    </div>
+                </header>
+
+                <section class="gh-content">
+                    {{content}}
+                </section>
+
+                <nav class="gh-article-nav">
+                    <div class="gh-article-nav-prev">
+                        {{#prev_post}}
+                            <a href="{{url}}">
+                                <span class="gh-article-nav-label">← Previous</span>
+                                {{title}}
+                            </a>
+                        {{/prev_post}}
+                    </div>
+                    <div class="gh-article-nav-next">
+                        {{#next_post}}
+                            <a href="{{url}}">
+                                <span class="gh-article-nav-label">Next →</span>
+                                {{title}}
+                            </a>
+                        {{/next_post}}
+                    </div>
+                </nav>
+
+                {{#if comments}}
+                    <section class="gh-comments">
+                        {{comments title="" count=false}}
+                    </section>
+                {{/if}}
+            </article>
+        {{/post}}
+    </div>
+</div>

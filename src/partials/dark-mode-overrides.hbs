@@ -1,0 +1,115 @@
+{{!-- Theme toggle (separate from main.min.js to avoid shared-assets crash) --}}
+<script>
+(function () {
+    var toggle = document.querySelector('.gh-theme-toggle');
+    if (!toggle) return;
+    var html = document.documentElement;
+
+    function getIsDark() {
+        var theme = html.getAttribute('data-theme');
+        if (theme === 'light') return false;
+        if (theme === 'dark') return true;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+
+    function updateIcons() {
+        var isDark = getIsDark();
+        toggle.querySelector('.gh-theme-icon-dark').style.display = isDark ? 'block' : 'none';
+        toggle.querySelector('.gh-theme-icon-light').style.display = isDark ? 'none' : 'block';
+    }
+
+    toggle.addEventListener('click', function () {
+        var next = getIsDark() ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateIcons();
+    });
+
+    updateIcons();
+})();
+</script>
+
+{{!-- Dark theme injection for Ghost Portal and Sodo Search iframes --}}
+<script>
+(function () {
+    var darkCSS = {
+        portal: [
+            '.gh-portal-popup-background { background: rgba(0,0,0,0.75) !important; }',
+            '.gh-portal-popup-container { background: #0B0F14 !important; color: #F5F7FA !important; border: 1px solid #1C232B !important; box-shadow: 0 20px 60px rgba(0,0,0,0.5) !important; }',
+            '.gh-portal-main-title { color: #F5F7FA !important; font-family: "JetBrains Mono", monospace !important; }',
+            '.gh-portal-text { color: #9BA6B2 !important; }',
+            '.gh-portal-input { background: #11161C !important; color: #F5F7FA !important; border-color: #1C232B !important; }',
+            '.gh-portal-input:focus { border-color: #00FF88 !important; }',
+            '.gh-portal-input-label { color: #9BA6B2 !important; }',
+            '.gh-portal-btn-main { border-radius: 0 !important; }',
+            '.gh-portal-signup-logo { display: none !important; }',
+            '.gh-portal-powered, .gh-portal-powered a { color: #9BA6B2 !important; }',
+            'a { color: #00FF88 !important; }',
+            '.gh-portal-btn-site-title-back { color: #F5F7FA !important; }',
+            '.gh-portal-closeicon { color: #9BA6B2 !important; }',
+            '.gh-portal-account-header { background: #11161C !important; }',
+            '.gh-portal-account-data { background: #0B0F14 !important; }',
+            'p, span, label, div { color: inherit; }',
+            '.gh-portal-list-toggle .gh-portal-list-toggle-button:not(.active) { background: #11161C !important; color: #9BA6B2 !important; }',
+            '.gh-portal-plans-container { border-color: #1C232B !important; background: #11161C !important; }',
+            '.gh-portal-plan-section { border-color: #1C232B !important; color: #F5F7FA !important; background: #11161C !important; }',
+            '.gh-portal-plan-pricelabel { color: #F5F7FA !important; }',
+            '.gh-portal-plan-name, .gh-portal-plan-feature { color: #9BA6B2 !important; }',
+            '.gh-portal-plan-section.checked { border-color: #00FF88 !important; background: #0F141A !important; }',
+            '.gh-portal-detail-header, .gh-portal-content h3, .gh-portal-content h4 { color: #F5F7FA !important; }'
+        ].join('\n'),
+        search: [
+            '.bg-white { background: #0B0F14 !important; }',
+            '.bg-neutral-100, .bg-gray-100 { background: #11161C !important; }',
+            '.shadow-xl { box-shadow: 0 20px 60px rgba(0,0,0,0.5) !important; }',
+            '.text-neutral-900, .text-black { color: #F5F7FA !important; }',
+            '.text-neutral-500, .text-gray-500, .text-neutral-400, .text-gray-400 { color: #9BA6B2 !important; }',
+            'input { background: transparent !important; color: #F5F7FA !important; caret-color: #00FF88 !important; }',
+            'input::placeholder { color: #9BA6B2 !important; }',
+            'svg { color: #9BA6B2 !important; }',
+            'svg path { fill: currentColor !important; }',
+            '.rounded-lg { border: 1px solid #1C232B !important; }',
+            'a { color: #F5F7FA !important; }',
+            'a:hover { color: #00FF88 !important; }',
+            '.border-neutral-100, .border-gray-100 { border-color: #1C232B !important; }',
+            'h2, h3, h4, p, span { color: inherit; }',
+            '.bg-gradient-to-br { background: rgba(0,0,0,0.75) !important; backdrop-filter: blur(4px) !important; }',
+            '.text-neutral-600, .text-gray-600 { color: #9BA6B2 !important; }',
+            'button { color: #9BA6B2 !important; }',
+            '.font-semibold, .font-bold, .font-medium { color: #F5F7FA !important; }',
+            'mark, .highlight { background: rgba(0,255,136,0.15) !important; color: #00FF88 !important; }'
+        ].join('\n')
+    };
+
+    function injectCSS(iframe, id, css) {
+        try {
+            var doc = iframe.contentDocument;
+            if (!doc || doc.getElementById(id)) return;
+            var s = doc.createElement('style');
+            s.id = id;
+            s.textContent = css;
+            doc.head.appendChild(s);
+        } catch (e) {}
+    }
+
+    function watchRoot(rootId, styleId, css) {
+        function observe(root) {
+            new MutationObserver(function () {
+                root.querySelectorAll('iframe').forEach(function (f) {
+                    injectCSS(f, styleId, css);
+                    f.addEventListener('load', function () { injectCSS(f, styleId, css); });
+                });
+            }).observe(root, { childList: true, subtree: true });
+        }
+        var el = document.getElementById(rootId);
+        if (el) return observe(el);
+        new MutationObserver(function (_, obs) {
+            var el = document.getElementById(rootId);
+            if (el) { obs.disconnect(); observe(el); }
+        }).observe(document.body, { childList: true });
+    }
+
+    watchRoot('ghost-portal-root', 'tld-portal-dark', darkCSS.portal);
+    watchRoot('sodo-search-root', 'tld-search-dark', darkCSS.search);
+})();
+</script>
