@@ -1,4 +1,5 @@
-{{!-- Custom structured data replacing Ghost's default (privacy.useStructuredData: false) --}}
+{{!-- Custom structured data — ghost_head no longer outputs OG/Twitter (privacy.useStructuredData: false) --}}
+{{!-- gscan warns about meta_description in head (GS001-DEPR-MD) but we need it since useStructuredData is disabled --}}
 <meta name="description" content="{{meta_description}}" />
 <meta name="referrer" content="no-referrer-when-downgrade" />
 <link rel="canonical" href="{{url absolute="true"}}" />
