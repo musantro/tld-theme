@@ -1,38 +1,53 @@
-# Solo
+# tld-theme
 
-Solo is a minimal theme for [Ghost](https://github.com/TryGhost/Ghost) focused on showcasing the work of an individual writer or creator. This theme is highly customizable, with a few simple settings that allow you to quickly apply your own personal style to your site.
+A dark-first, monospace-forward Ghost theme for [thelaziest.dev](https://thelaziest.dev). Built with JetBrains Mono, Inter, Alpine.js, and Tailwind CSS on top of Ghost's Solo theme.
 
-**Demo: https://solo.ghost.io**
+# Prerequisites
 
-# Instructions
+This theme requires the following Ghost configuration:
 
-1. [Download this theme](https://github.com/TryGhost/Solo/archive/main.zip)
-2. Log into Ghost, and go to the `Design` settings area to upload the zip file
+```
+privacy__useStructuredData=false
+```
+
+This disables Ghost's built-in Open Graph / Twitter Card / JSON-LD output from `{{ghost_head}}`, allowing the theme to manage its own structured data. The theme outputs all necessary meta tags via the `meta-tags` partial, including dynamically generated social card images powered by [Microlink Cards](https://cards.microlink.io).
+
+Without this setting, Ghost will output duplicate `og:image` tags that conflict with the theme's generated social cards.
+
+`{{ghost_head}}` continues to handle Portal, search, Stripe, code injection, and other non-metadata functionality.
 
 # Development
 
-Edition styles are compiled using Gulp/PostCSS to polyfill future CSS spec. You'll need [Node](https://nodejs.org/), [Yarn](https://yarnpkg.com/) and [Gulp](https://gulpjs.com) installed globally. After that, from the theme's root directory:
+Styles are compiled using Gulp/PostCSS. You'll need [Node](https://nodejs.org/) and [Gulp](https://gulpjs.com) installed globally.
 
 ```bash
-# Install
-yarn
+# Install dependencies
+cd src && npm install
 
 # Run build & watch for changes
-yarn dev
+npm run dev
 ```
 
 Now you can edit `/assets/css/` files, which will be compiled to `/assets/built/` automatically.
 
-The `zip` Gulp task packages the theme files into `dist/solo.zip`, which you can then upload to your site.
-
 ```bash
-yarn zip
+# Package theme for upload
+npm run zip
 ```
 
-# Contribution
+# Social Cards
 
-This repo is synced automatically with [TryGhost/Themes](https://github.com/TryGhost/Themes) monorepo. If you're looking to contribute or raise an issue, head over to the main repository [TryGhost/Themes](https://github.com/TryGhost/Themes) where our official themes are developed.
+Post pages automatically get dynamically generated social thumbnails via Microlink Cards. The card template matches the site's dark design:
+
+- Background: `#0B0F14`
+- Title: white JetBrains Mono bold
+- Description: `#9BA6B2` Inter
+- Accent: `#00FF88` green (brand color)
+
+The card template is encoded in the `meta-tags` partial. To modify the card design, use the [Microlink Cards editor](https://cards.microlink.io/editor), update the query variables to match your theme, and replace the `p` parameter in the partial.
+
+Non-post pages (homepage, tags, authors) fall back to the site cover image for `og:image`.
 
 ## Copyright & License
 
-Copyright (c) 2013-2023 Ghost Foundation - Released under the [MIT license](LICENSE).
+Based on [Solo](https://github.com/TryGhost/Solo) by Ghost Foundation - Released under the [MIT license](LICENSE).
